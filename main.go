@@ -2,26 +2,21 @@ package main
 
 import (
 	"fmt"
-	"strings"
+	"strconv"
 )
 
 func main() {
-	fmt.Println(ToJadenCase("How can mirrors be real if our eyes aren't real"))
+	fmt.Println(MaxRot(56789))
 }
-func ToJadenCase(str string) string {
-	// arr := strings.Split(str, " ")
-	// fmt.Println(arr)
-	result := ""
-	result += strings.ToUpper(string(str[0]))
-	for i := 1; i < len(str); i++ {
-
-		if string(str[i-1]) == " " {
-			result += strings.ToUpper(string(str[i]))
-		} else {
-			result += string(str[i])
+func MaxRot(n int64) int64 {
+	str := strconv.FormatInt(n, 10)
+	max := n
+	for i := 0; i < len(str)-1; i++ {
+		str = str[:i] + str[i+1:] + string(str[i])
+		current, _ := strconv.ParseInt(str, 10, 64)
+		if current > max {
+			max = current
 		}
 	}
-	// arr1 := strings.ToUpper(arr[0])
-	// fmt.Println(arr1)
-	return result
+	return max
 }
